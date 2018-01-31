@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.airbnb.epoxy.EpoxyRecyclerView;
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.features.commons.BaseFragment;
+import com.xception.schoolevents.features.events.items.EventListEventItem_;
+import com.xception.schoolevents.features.events.items.EventListSectionItem_;
 
 import butterknife.BindView;
 
@@ -60,6 +62,24 @@ public class EventListFragment extends BaseFragment implements EventListContract
 
     @Override
     public void showItems(@NonNull EventListContract.Data data) {
+        mRecyclerView.buildModelsWith(controller -> {
+            for (EventListContract.ItemData itemData : data.itemsData) {
+                Log.d(TAG, "showItems: " + itemData.id);
+                if (itemData instanceof EventListContract.SectionItemData) {
+                    new EventListSectionItem_()
+                            .id(itemData.id)
+                            .sectionItemData((EventListContract.SectionItemData) itemData)
+                            .addTo(controller);
+                } else if (itemData instanceof EventListContract.EventItemData) {
+                    new EventListEventItem_()
+                            .id(itemData.id)
+                            .eventItemData((EventListContract.EventItemData) itemData)
+                            .addTo(controller);
+                } else {
+                    Log.e(TAG, "showItems: item not recognized");
+                }
+            }
+        });
     }
 
     @Override
@@ -70,6 +90,8 @@ public class EventListFragment extends BaseFragment implements EventListContract
     // endregion
 
     // region companion object
+
+    public static String TAG = EventListFragment.class.getSimpleName();
 
     public static EventListFragment newInstance() {
         EventListFragment fragment = new EventListFragment();

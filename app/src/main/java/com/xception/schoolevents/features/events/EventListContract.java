@@ -23,9 +23,14 @@ public interface EventListContract {
     class ItemData {
         public long id;
         public String title;
+    }
+
+    class SectionItemData extends ItemData {
+    }
+
+    class EventItemData extends ItemData {
         public String imageUrl;
         public String date;
-        public String title;
         public String excerpt;
         public android.view.View.OnClickListener clickListener;
     }
