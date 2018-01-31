@@ -1,14 +1,17 @@
 package com.xception.schoolevents.features.events;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.airbnb.epoxy.EpoxyRecyclerView;
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.features.commons.BaseFragment;
 
@@ -18,7 +21,7 @@ import butterknife.BindView;
 public class EventListFragment extends BaseFragment implements EventListContract.View {
 
     @BindView(R.id.event_list_recycler_view)
-    RecyclerView mRecyclerView;
+    EpoxyRecyclerView mRecyclerView;
 
     private EventListContract.Presenter mPresenter;
 
@@ -29,6 +32,7 @@ public class EventListFragment extends BaseFragment implements EventListContract
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         mPresenter = new EventListPresenter(this);
 
@@ -55,8 +59,7 @@ public class EventListFragment extends BaseFragment implements EventListContract
     // region  EventListContract.View
 
     @Override
-    public void showItems(EventListContract.Data data) {
-        // TODO: display the items in the recycler view
+    public void showItems(@NonNull EventListContract.Data data) {
     }
 
     @Override
