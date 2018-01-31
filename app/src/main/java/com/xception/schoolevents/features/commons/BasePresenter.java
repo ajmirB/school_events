@@ -1,6 +1,12 @@
 package com.xception.schoolevents.features.commons;
 
-public class BasePresenter implements BaseContract.Presenter {
+public abstract class BasePresenter<T extends BaseContract.View> implements BaseContract.Presenter {
+
+    protected T mView;
+
+    public BasePresenter(T view) {
+        mView = view;
+    }
 
     @Override
     public void onViewCreated() {
