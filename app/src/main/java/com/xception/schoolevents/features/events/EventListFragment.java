@@ -64,7 +64,6 @@ public class EventListFragment extends BaseFragment implements EventListContract
     public void showItems(@NonNull EventListContract.Data data) {
         mRecyclerView.buildModelsWith(controller -> {
             for (EventListContract.ItemData itemData : data.itemsData) {
-                Log.d(TAG, "showItems: " + itemData.id);
                 if (itemData instanceof EventListContract.SectionItemData) {
                     new EventListSectionItem_()
                             .id(itemData.id)

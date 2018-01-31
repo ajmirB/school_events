@@ -1,8 +1,13 @@
 package com.xception.schoolevents.features.events;
 
+import android.util.Log;
+
+import com.xception.schoolevents.core.api.RestClient;
 import com.xception.schoolevents.features.commons.BasePresenter;
 
 import java.util.ArrayList;
+
+import io.reactivex.schedulers.Schedulers;
 
 public class EventListPresenter extends BasePresenter<EventListContract.View> implements EventListContract.Presenter {
 
@@ -13,6 +18,13 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
     @Override
     public void onViewCreated() {
         super.onViewCreated();
+
+        RestClient.getEventsService().getEvents()
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        object -> Log.d("test", "request: " + object),
+                        Throwable::printStackTrace
+                );
 
         // TODO: Use data from ws
         // Generate dummy data

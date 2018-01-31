@@ -31,6 +31,7 @@ ext {
     versions = [
             support     : '26.1.0',
             butterknife : '8.8.1',
-            epoxy       : '2.9.0'
+            epoxy       : '2.9.0',
+            retrofit    : '2.3.0'
     ]
 }
