@@ -1,9 +1,13 @@
 
 package com.xception.schoolevents.core.models.events;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel(Parcel.Serialization.BEAN)
 public class Category {
 
     @SerializedName("id")
@@ -29,5 +33,4 @@ public class Category {
     public void setType(String type) {
         this.type = type;
     }
-
 }

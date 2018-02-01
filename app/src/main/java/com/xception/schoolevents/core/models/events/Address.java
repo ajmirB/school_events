@@ -4,6 +4,9 @@ package com.xception.schoolevents.core.models.events;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel(Parcel.Serialization.BEAN)
 public class Address {
 
     @SerializedName("streetAddress")
@@ -65,5 +68,4 @@ public class Address {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
-
 }

@@ -1,11 +1,15 @@
 
 package com.xception.schoolevents.core.models.events;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel(Parcel.Serialization.BEAN)
 public class Event {
 
     @SerializedName("form")
@@ -51,10 +55,6 @@ public class Event {
     @SerializedName("medias")
     @Expose
     private List<Media> medias = null;
-
-    @SerializedName("linksToItem")
-    @Expose
-    private List<Object> linksToItem = null;
 
     @SerializedName("payload_schema")
     @Expose
@@ -216,14 +216,6 @@ public class Event {
         this.medias = medias;
     }
 
-    public List<Object> getLinksToItem() {
-        return linksToItem;
-    }
-
-    public void setLinksToItem(List<Object> linksToItem) {
-        this.linksToItem = linksToItem;
-    }
-
     public String getPayloadSchema() {
         return payloadSchema;
     }
@@ -367,5 +359,4 @@ public class Event {
     public void setExternalLink(String externalLink) {
         this.externalLink = externalLink;
     }
-
 }
