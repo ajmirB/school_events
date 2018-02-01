@@ -33,7 +33,7 @@ public class EventListHelper {
      * @param event event to create the section
      * @return an event item data converted from the event in input
      */
-    public static EventListContract.EventItemData getEventItemDate(Context context, Event event) {
+    public static EventListContract.EventItemData getEventItemData(Context context, Event event) {
         EventListContract.EventItemData eventItemData = new EventListContract.EventItemData();
 
         eventItemData.id = event.getId();

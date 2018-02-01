@@ -42,7 +42,7 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
                 .subscribeOn(Schedulers.io())
                 // Convert each item from server to a data item
                 .flatMapObservable(Observable::fromIterable)
-                .map(event -> EventListHelper.getEventItemDate(context, event))
+                .map(event -> EventListHelper.getEventItemData(context, event))
                 // Merge all item as a sorted list
                 .sorted((eventItemData1, eventItemData2) -> eventItemData1.date.compareTo(eventItemData2.date))
                 .toList()
