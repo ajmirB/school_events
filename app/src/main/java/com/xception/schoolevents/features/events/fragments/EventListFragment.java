@@ -1,4 +1,4 @@
-package com.xception.schoolevents.features.events;
+package com.xception.schoolevents.features.events.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,10 +13,14 @@ import android.view.ViewGroup;
 
 import com.airbnb.epoxy.EpoxyRecyclerView;
 import com.xception.schoolevents.R;
+import com.xception.schoolevents.core.models.events.Event;
 import com.xception.schoolevents.features.commons.BaseFragment;
 import com.xception.schoolevents.features.commons.items.FallbackItem_;
+import com.xception.schoolevents.features.events.activities.EventDetailActivity;
+import com.xception.schoolevents.features.events.contracts.EventListContract;
 import com.xception.schoolevents.features.events.items.EventListEventItem_;
 import com.xception.schoolevents.features.events.items.EventListSectionItem_;
+import com.xception.schoolevents.features.events.presenters.EventListPresenter;
 
 import butterknife.BindView;
 
@@ -93,8 +97,8 @@ public class EventListFragment extends BaseFragment implements EventListContract
     }
 
     @Override
-    public void goToEventDetail() {
-        // TODO open the event detail
+    public void goToEventDetail(@NonNull Event event) {
+        startActivity(EventDetailActivity.newIntent(getActivity(), event));
     }
 
     // endregion

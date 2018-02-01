@@ -9,7 +9,7 @@ import com.airbnb.epoxy.EpoxyHolder;
 import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.xception.schoolevents.R;
-import com.xception.schoolevents.features.events.EventListContract;
+import com.xception.schoolevents.features.events.contracts.EventListContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

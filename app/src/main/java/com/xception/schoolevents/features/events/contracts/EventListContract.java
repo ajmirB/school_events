@@ -1,7 +1,8 @@
-package com.xception.schoolevents.features.events;
+package com.xception.schoolevents.features.events.contracts;
 
 import android.support.annotation.NonNull;
 
+import com.xception.schoolevents.core.models.events.Event;
 import com.xception.schoolevents.features.commons.BaseContract;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public interface EventListContract extends BaseContract {
     interface View extends BaseContract.View {
         void showItems(@NonNull Data data);
         void showFallback(@NonNull OnClickListener onClickListener);
-        void goToEventDetail();
+        void goToEventDetail(@NonNull Event event);
     }
 
     class Data {

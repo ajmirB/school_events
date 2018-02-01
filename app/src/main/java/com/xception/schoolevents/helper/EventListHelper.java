@@ -5,7 +5,7 @@ import android.text.format.DateFormat;
 
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.core.models.events.Event;
-import com.xception.schoolevents.features.events.EventListContract;
+import com.xception.schoolevents.features.events.contracts.EventListContract;
 
 import java.util.Date;
 

@@ -1,9 +1,10 @@
-package com.xception.schoolevents.features.events;
+package com.xception.schoolevents.features.events.activities;
 
 import android.os.Bundle;
 
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.features.commons.BaseActivity;
+import com.xception.schoolevents.features.events.fragments.EventListFragment;
 
 public class EventListActivity extends BaseActivity {
 

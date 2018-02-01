@@ -1,9 +1,10 @@
-package com.xception.schoolevents.features.events;
+package com.xception.schoolevents.features.events.presenters;
 
 import android.content.Context;
 
 import com.xception.schoolevents.core.managers.EventManager;
 import com.xception.schoolevents.features.commons.BasePresenter;
+import com.xception.schoolevents.features.events.contracts.EventListContract;
 import com.xception.schoolevents.helper.ApplicationHelper;
 import com.xception.schoolevents.helper.DateHelper;
 import com.xception.schoolevents.helper.EventListHelper;
@@ -42,7 +43,11 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
                 .subscribeOn(Schedulers.io())
                 // Convert each item from server to a data item
                 .flatMapObservable(Observable::fromIterable)
-                .map(event -> EventListHelper.getEventItemData(context, event))
+                .map(event -> {
+                    EventListContract.EventItemData eventItemData = EventListHelper.getEventItemData(context, event);
+                    eventItemData.clickListener = v -> mView.goToEventDetail(event);
+                    return eventItemData;
+                })
                 // Merge all item as a sorted list
                 .sorted((eventItemData1, eventItemData2) -> eventItemData1.date.compareTo(eventItemData2.date))
                 .toList()

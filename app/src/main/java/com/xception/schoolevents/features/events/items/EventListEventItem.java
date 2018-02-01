@@ -11,7 +11,7 @@ import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.bumptech.glide.Glide;
 import com.xception.schoolevents.R;
-import com.xception.schoolevents.features.events.EventListContract;
+import com.xception.schoolevents.features.events.contracts.EventListContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
