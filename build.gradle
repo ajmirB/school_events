@@ -29,9 +29,10 @@ task clean(type: Delete) {
 
 ext {
     versions = [
-            support     : '26.1.0',
+            support     : '27.0.2',
             butterknife : '8.8.1',
             epoxy       : '2.9.0',
-            retrofit    : '2.3.0'
+            retrofit    : '2.3.0',
+            glide       : '4.5.0'
     ]
 }
