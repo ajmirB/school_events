@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.xception.schoolevents.features.commons.BaseContract;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EventListContract {
@@ -21,7 +22,7 @@ public interface EventListContract {
     }
 
     class ItemData {
-        public long id;
+        public String id;
         public String title;
     }
 
@@ -30,7 +31,8 @@ public interface EventListContract {
 
     class EventItemData extends ItemData {
         public String imageUrl;
-        public String date;
+        public Date date;
+        public String dateToDisplay;
         public String excerpt;
         public android.view.View.OnClickListener clickListener;
     }

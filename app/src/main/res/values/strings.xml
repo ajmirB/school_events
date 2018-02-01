@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">School Events</string>
+
+    <!-- Event list -->
+    <string name="event_list_section_item_title_pattern">"MMMM yyyy"</string>
+    <string name="event_list_event_item_date_pattern">"dd/MM"</string>
+
 </resources>

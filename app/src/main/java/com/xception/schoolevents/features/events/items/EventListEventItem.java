@@ -24,7 +24,7 @@ public abstract class EventListEventItem extends EpoxyModelWithHolder<EventListE
     @Override
     public void bind(@NonNull Holder holder) {
         super.bind(holder);
-        holder.dateTextView.setText(eventItemData.date);
+        holder.dateTextView.setText(eventItemData.dateToDisplay);
         holder.titleTextView.setText(eventItemData.title);
         holder.excerptTextView.setText(eventItemData.excerpt);
         holder.itemView.setOnClickListener(eventItemData.clickListener);

@@ -1,12 +1,18 @@
 package com.xception.schoolevents.features.events;
 
-import android.util.Log;
+import android.content.Context;
 
 import com.xception.schoolevents.core.api.RestClient;
 import com.xception.schoolevents.features.commons.BasePresenter;
+import com.xception.schoolevents.helper.ApplicationHelper;
+import com.xception.schoolevents.helper.DateHelper;
+import com.xception.schoolevents.helper.EventListHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class EventListPresenter extends BasePresenter<EventListContract.View> implements EventListContract.Presenter {
@@ -18,38 +24,54 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
     @Override
     public void onViewCreated() {
         super.onViewCreated();
+        Context context = ApplicationHelper.getInstance().getContext();
 
         RestClient.getEventsService().getEvents()
                 .subscribeOn(Schedulers.io())
+                // Convert each item from server to a data item
+                .flatMap(Observable::fromIterable)
+                .map(event -> EventListHelper.getEventItemDate(context, event))
+                // Merge all item as a sorted list
+                .sorted((eventItemData1, eventItemData2) -> eventItemData1.date.compareTo(eventItemData2.date))
+                .toList()
+                .map(eventItemsData ->  {
+                    List<EventListContract.ItemData> itemsData = new ArrayList<>(eventItemsData.size());
+
+                    int monthBefore;
+                    int yearBefore;
+                    int currentMonth;
+                    int currentYear;
+                    for (int i=0; i<eventItemsData.size(); i++) {
+                        // Create section if necessary
+                        if (i == 0) {
+                            itemsData.add(EventListHelper.getSectionItemData(context, eventItemsData.get(i).date));
+                        } else  {
+                            monthBefore = DateHelper.getMonth(eventItemsData.get(i-1).date);
+                            yearBefore = DateHelper.getYear(eventItemsData.get(i-1).date);
+                            currentMonth = DateHelper.getMonth(eventItemsData.get(i).date);
+                            currentYear = DateHelper.getYear(eventItemsData.get(i).date);
+
+                            if (currentYear > yearBefore ||monthBefore < currentMonth) {
+                                itemsData.add(EventListHelper.getSectionItemData(context, eventItemsData.get(i).date));
+                            }
+                        }
+
+                        // Add the current formatted item
+                        itemsData.add(eventItemsData.get(i));
+                    }
+
+                    return itemsData;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        object -> Log.d("test", "request: " + object),
+                        itemsData -> {
+                            // Display the items
+                            EventListContract.Data data = new EventListContract.Data();
+                            data.itemsData = itemsData;
+                            mView.showItems(data);
+                        },
                         Throwable::printStackTrace
                 );
 
-        // TODO: Use data from ws
-        // Generate dummy data
-        int nbItems = 20;
-        EventListContract.Data data = new EventListContract.Data();
-        data.itemsData = new ArrayList<>(nbItems);
-
-        EventListContract.SectionItemData sectionItemData;
-        EventListContract.EventItemData eventItemData;
-        for (int i = 0; i < nbItems; i++){
-            if (i == 0 || i%3 == 0) {
-                sectionItemData = new EventListContract.SectionItemData();
-                sectionItemData.id = i;
-                sectionItemData.title = "Month " + i;
-                data.itemsData.add(sectionItemData);
-            } else {
-                eventItemData = new EventListContract.EventItemData();
-                eventItemData.id = i;
-                eventItemData.date = i + "" + i + "/" + i + "" + i;
-                eventItemData.title = "Title " + i;
-                eventItemData.excerpt = "Excerpt " + i;
-                data.itemsData.add(eventItemData);
-            }
-        }
-
-        mView.showItems(data);
     }
 }
