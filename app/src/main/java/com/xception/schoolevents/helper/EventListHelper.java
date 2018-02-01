@@ -37,9 +37,12 @@ public class EventListHelper {
         EventListContract.EventItemData eventItemData = new EventListContract.EventItemData();
 
         eventItemData.id = event.getId();
-        eventItemData.imageUrl = event.getIcon();
         eventItemData.title = event.getTitle();
         eventItemData.excerpt = event.getExcerpt();
+
+        if (event.getMedias() != null && event.getMedias().size() > 0) {
+            eventItemData.imageUrl = event.getMedias().get(0).getUrl();
+        }
 
         eventItemData.date = DateHelper.getDate(event.getDateStart());
         eventItemData.dateToDisplay = getEventItemDateToDisplay(context, eventItemData.date);

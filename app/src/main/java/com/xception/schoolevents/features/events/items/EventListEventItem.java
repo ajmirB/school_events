@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyAttribute;
 import com.airbnb.epoxy.EpoxyHolder;
 import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
+import com.bumptech.glide.Glide;
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.features.events.EventListContract;
 
@@ -28,6 +29,10 @@ public abstract class EventListEventItem extends EpoxyModelWithHolder<EventListE
         holder.titleTextView.setText(eventItemData.title);
         holder.excerptTextView.setText(eventItemData.excerpt);
         holder.itemView.setOnClickListener(eventItemData.clickListener);
+
+        Glide.with(holder.imageView)
+                .load(eventItemData.imageUrl)
+                .into(holder.imageView);
     }
 
     static class Holder extends EpoxyHolder {
