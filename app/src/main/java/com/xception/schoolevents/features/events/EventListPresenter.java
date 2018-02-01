@@ -2,7 +2,7 @@ package com.xception.schoolevents.features.events;
 
 import android.content.Context;
 
-import com.xception.schoolevents.core.api.RestClient;
+import com.xception.schoolevents.core.managers.EventManager;
 import com.xception.schoolevents.features.commons.BasePresenter;
 import com.xception.schoolevents.helper.ApplicationHelper;
 import com.xception.schoolevents.helper.DateHelper;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class EventListPresenter extends BasePresenter<EventListContract.View> implements EventListContract.Presenter {
@@ -24,12 +25,23 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
     @Override
     public void onViewCreated() {
         super.onViewCreated();
-        Context context = ApplicationHelper.getInstance().getContext();
+        showEvents();
+    }
 
-        RestClient.getEventsService().getEvents()
+    private void showEvents() {
+        // No network
+        if (!ApplicationHelper.getInstance().isNetworkAvailable()) {
+            showFallback();
+            return;
+        }
+
+        Context context = ApplicationHelper.getInstance().getContext();
+        EventManager eventManager = new EventManager();
+
+        Disposable disposable = eventManager.getEvents()
                 .subscribeOn(Schedulers.io())
                 // Convert each item from server to a data item
-                .flatMap(Observable::fromIterable)
+                .flatMapObservable(Observable::fromIterable)
                 .map(event -> EventListHelper.getEventItemDate(context, event))
                 // Merge all item as a sorted list
                 .sorted((eventItemData1, eventItemData2) -> eventItemData1.date.compareTo(eventItemData2.date))
@@ -37,10 +49,8 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
                 .map(eventItemsData ->  {
                     List<EventListContract.ItemData> itemsData = new ArrayList<>(eventItemsData.size());
 
-                    int monthBefore;
-                    int yearBefore;
-                    int currentMonth;
-                    int currentYear;
+                    int monthBefore, yearBefore;
+                    int currentMonth, currentYear;
                     for (int i=0; i<eventItemsData.size(); i++) {
                         // Create section if necessary
                         if (i == 0) {
@@ -48,6 +58,7 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
                         } else  {
                             monthBefore = DateHelper.getMonth(eventItemsData.get(i-1).date);
                             yearBefore = DateHelper.getYear(eventItemsData.get(i-1).date);
+
                             currentMonth = DateHelper.getMonth(eventItemsData.get(i).date);
                             currentYear = DateHelper.getYear(eventItemsData.get(i).date);
 
@@ -72,6 +83,10 @@ public class EventListPresenter extends BasePresenter<EventListContract.View> im
                         },
                         Throwable::printStackTrace
                 );
+        mCompositeDisposable.add(disposable);
+    }
 
+    private void showFallback() {
+        mView.showFallback(v -> showEvents());
     }
 }

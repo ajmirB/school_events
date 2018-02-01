@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Default -->
+    <dimen name="external_spacing">8dp</dimen>
+    <dimen name="inside_spacing">10dp</dimen>
+
+    <!-- Fallback -->
+    <dimen name="fallback_item_external_spacing">@dimen/external_spacing</dimen>
+    <dimen name="fallback_item_inside_spacing">@dimen/inside_spacing</dimen>
+
     <!-- Event list -->
-    <dimen name="event_list_item_external_spacing">8dp</dimen>
-    <dimen name="event_list_item_inside_spacing">10dp</dimen>
+    <dimen name="event_list_item_external_spacing">@dimen/external_spacing</dimen>
+    <dimen name="event_list_item_inside_spacing">@dimen/inside_spacing</dimen>
 
     <dimen name="event_list_section_item_text_size">16sp</dimen>
 

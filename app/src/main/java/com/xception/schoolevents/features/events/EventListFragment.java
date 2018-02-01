@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.airbnb.epoxy.EpoxyRecyclerView;
 import com.xception.schoolevents.R;
 import com.xception.schoolevents.features.commons.BaseFragment;
+import com.xception.schoolevents.features.commons.items.FallbackItem_;
 import com.xception.schoolevents.features.events.items.EventListEventItem_;
 import com.xception.schoolevents.features.events.items.EventListSectionItem_;
 
@@ -78,6 +79,16 @@ public class EventListFragment extends BaseFragment implements EventListContract
                     Log.e(TAG, "showItems: item not recognized");
                 }
             }
+        });
+    }
+
+    @Override
+    public void showFallback(@NonNull View.OnClickListener onClickListener) {
+        mRecyclerView.buildModelsWith(controller -> {
+            new FallbackItem_()
+                    .id("fallback")
+                    .clickListener(onClickListener)
+                    .addTo(controller);
         });
     }
 

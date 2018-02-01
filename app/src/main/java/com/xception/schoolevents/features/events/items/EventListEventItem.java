@@ -30,9 +30,11 @@ public abstract class EventListEventItem extends EpoxyModelWithHolder<EventListE
         holder.excerptTextView.setText(eventItemData.excerpt);
         holder.itemView.setOnClickListener(eventItemData.clickListener);
 
-        Glide.with(holder.imageView)
-                .load(eventItemData.imageUrl)
-                .into(holder.imageView);
+        if (eventItemData.imageUrl != null) {
+            Glide.with(holder.imageView)
+                    .load(eventItemData.imageUrl)
+                    .into(holder.imageView);
+        }
     }
 
     static class Holder extends EpoxyHolder {

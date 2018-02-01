@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">School Events</string>
 
+    <!-- Fallback -->
+    <string name="fallback_item_description">Sorry, an error occured. Please try again :)</string>
+    <string name="fallback_item_button_label">Refresh</string>
+
     <!-- Event list -->
     <string name="event_list_section_item_title_pattern">"MMMM yyyy"</string>
     <string name="event_list_event_item_date_pattern">"dd/MM"</string>

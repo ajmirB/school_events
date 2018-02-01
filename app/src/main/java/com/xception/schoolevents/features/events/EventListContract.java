@@ -7,13 +7,16 @@ import com.xception.schoolevents.features.commons.BaseContract;
 import java.util.Date;
 import java.util.List;
 
-public interface EventListContract {
+import static android.view.View.*;
+
+public interface EventListContract extends BaseContract {
 
     interface Presenter extends BaseContract.Presenter {
     }
 
     interface View extends BaseContract.View {
         void showItems(@NonNull Data data);
+        void showFallback(@NonNull OnClickListener onClickListener);
         void goToEventDetail();
     }
 
@@ -34,6 +37,6 @@ public interface EventListContract {
         public Date date;
         public String dateToDisplay;
         public String excerpt;
-        public android.view.View.OnClickListener clickListener;
+        public OnClickListener clickListener;
     }
 }
