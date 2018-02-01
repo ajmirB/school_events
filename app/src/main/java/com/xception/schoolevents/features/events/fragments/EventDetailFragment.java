@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,8 @@ import com.xception.schoolevents.R;
 import com.xception.schoolevents.core.models.events.Event;
 import com.xception.schoolevents.features.commons.BaseFragment;
 import com.xception.schoolevents.features.events.contracts.EventDetailContract;
+import com.xception.schoolevents.features.events.items.EventDetailCalendarItem_;
+import com.xception.schoolevents.features.events.items.EventDetailContentItem_;
 import com.xception.schoolevents.features.events.presenters.EventDetailPresenter;
 
 import org.parceler.Parcels;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 
 public class EventDetailFragment extends BaseFragment implements EventDetailContract.View {
 
-    @BindView(R.id.event_list_recycler_view)
+    @BindView(R.id.event_detail_recycler_view)
     EpoxyRecyclerView mRecyclerView;
 
     private EventDetailContract.Presenter mPresenter;
@@ -37,7 +38,6 @@ public class EventDetailFragment extends BaseFragment implements EventDetailCont
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         Event event = Parcels.unwrap(getArguments().getParcelable(EVENT_KEY));
         mPresenter = new EventDetailPresenter(this, event);
@@ -59,19 +59,29 @@ public class EventDetailFragment extends BaseFragment implements EventDetailCont
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_event_list;
+        return R.layout.fragment_event_detail;
     }
 
     // region  EventDetailContract.View
 
     @Override
     public void showEvent(@NonNull EventDetailContract.Data data) {
+        mRecyclerView.buildModelsWith(controller -> {
+            new EventDetailContentItem_()
+                    .id(0)
+                    .eventData(data.eventData)
+                    .addTo(controller);
 
+            new EventDetailCalendarItem_()
+                    .id(1)
+                    .clickListener(data.calendarClickListener)
+                    .addTo(controller);
+        });
     }
 
     @Override
     public void goToCalendar(EventDetailContract.CalendarData calendarData) {
-        Toast.makeText(getContext(), "Not implemented", Toast.LENGTH_LONG);
+        Toast.makeText(getContext(), "Not implemented", Toast.LENGTH_LONG).show();
     }
 
     // endregion

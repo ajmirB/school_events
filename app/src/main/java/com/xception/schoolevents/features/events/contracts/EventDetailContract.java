@@ -1,6 +1,7 @@
 package com.xception.schoolevents.features.events.contracts;
 
 import android.support.annotation.NonNull;
+import android.text.Spanned;
 
 import com.xception.schoolevents.features.commons.BaseContract;
 
@@ -27,7 +28,7 @@ public interface EventDetailContract extends BaseContract {
     class EventData {
         public String address;
         public String dateToDisplay;
-        public String content;
+        public Spanned content;
     }
 
     class CalendarData {

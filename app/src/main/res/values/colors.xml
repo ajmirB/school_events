@@ -8,4 +8,7 @@
     <color name="event_list_section_item_title_background_color">#3d3d3d</color>
     <color name="event_list_section_item_title_text_color">#FFF</color>
 
+    <!-- Event detail -->
+    <color name="event_detail_background_color">#f2f2f2</color>
+
 </resources>

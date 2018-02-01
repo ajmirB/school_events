@@ -1,5 +1,7 @@
 package com.xception.schoolevents.features.events.presenters;
 
+import android.text.Html;
+
 import com.xception.schoolevents.core.models.events.Event;
 import com.xception.schoolevents.features.commons.BasePresenter;
 import com.xception.schoolevents.features.events.contracts.EventDetailContract;
@@ -17,7 +19,7 @@ public class EventDetailPresenter extends BasePresenter<EventDetailContract.View
 
         data.eventData = new EventDetailContract.EventData();
         data.eventData.address = event.getAddress().getStreetAddress() + " - " + event.getAddress().getCityName();
-        data.eventData.content = event.getContent();
+        data.eventData.content = Html.fromHtml(event.getContent());
         data.eventData.dateToDisplay = event.getDateStart();
 
         EventDetailContract.CalendarData calendarData = new EventDetailContract.CalendarData();
