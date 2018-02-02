@@ -66,6 +66,8 @@ public class EventDetailFragment extends BaseFragment implements EventDetailCont
 
     @Override
     public void showEvent(@NonNull EventDetailContract.Data data) {
+        getActivity().setTitle(data.title);
+
         mRecyclerView.buildModelsWith(controller -> {
             new EventDetailContentItem_()
                     .id(0)
