@@ -17,6 +17,7 @@ public class EventDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+        setNavigationBackButton(true);
 
         Event event = Parcels.unwrap(getIntent().getParcelableExtra(EVENT_KEY));
         showEventDetailFragment(event);
