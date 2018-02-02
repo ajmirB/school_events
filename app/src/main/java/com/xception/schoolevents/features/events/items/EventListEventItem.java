@@ -27,7 +27,7 @@ public abstract class EventListEventItem extends EpoxyModelWithHolder<EventListE
         super.bind(holder);
         holder.dateTextView.setText(eventItemData.dateToDisplay);
         holder.titleTextView.setText(eventItemData.title);
-        holder.excerptTextView.setText(eventItemData.excerpt);
+        holder.descriptionTextView.setText(eventItemData.excerpt);
         holder.itemView.setOnClickListener(eventItemData.clickListener);
 
         if (eventItemData.imageUrl != null) {
@@ -50,8 +50,8 @@ public abstract class EventListEventItem extends EpoxyModelWithHolder<EventListE
         @BindView(R.id.event_list_item_title_text_view)
         TextView titleTextView;
 
-        @BindView(R.id.event_list_item_excerpt_text_view)
-        TextView excerptTextView;
+        @BindView(R.id.event_list_item_description_text_view)
+        TextView descriptionTextView;
 
         @Override
         protected void bindView(View itemView) {

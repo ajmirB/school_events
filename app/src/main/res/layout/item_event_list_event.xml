@@ -4,12 +4,16 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    tool:ignore="RtlSymmetry">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/event_list_item_external_spacing">
+        android:paddingBottom="@dimen/event_list_item_external_spacing"
+        android:paddingLeft="@dimen/event_list_item_external_spacing"
+        android:paddingStart="@dimen/event_list_item_external_spacing"
+        android:paddingTop="@dimen/event_list_item_external_spacing">
 
         <ImageView
             android:id="@+id/event_list_item_image_view"
@@ -41,20 +45,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/event_list_item_inside_spacing"
             android:layout_marginStart="@dimen/event_list_item_inside_spacing"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="@dimen/event_list_event_item_secondary_text_size"
+            android:textColor="@color/event_list_event_item_title_text_color"
+            android:textSize="@dimen/event_list_event_item_title_text_size"
             app:layout_constraintEnd_toStartOf="@+id/event_list_arrow_view"
             app:layout_constraintStart_toEndOf="@+id/event_list_item_date_text_view"
             app:layout_constraintTop_toTopOf="parent"
             tool:text="Title" />
 
         <TextView
-            android:id="@+id/event_list_item_excerpt_text_view"
+            android:id="@+id/event_list_item_description_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/event_list_item_inside_spacing"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="@dimen/event_list_event_item_secondary_text_size"
+            android:textColor="@color/event_list_event_item_description_text_color"
+            android:textSize="@dimen/event_list_event_item_description_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/event_list_arrow_view"
             app:layout_constraintStart_toStartOf="@+id/event_list_item_title_text_view"

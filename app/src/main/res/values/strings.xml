@@ -10,6 +10,7 @@
     <string name="event_list_event_item_date_pattern">"dd/MM"</string>
 
     <!-- Event detail -->
+    <string name="event_detail_item_date_pattern">"dd MMMM yyyy, mm:ss"</string>
     <string name="event_detail_calendar_item_button_label">Add to calendar</string>
 
 </resources>

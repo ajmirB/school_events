@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="@color/event_detail_background_color">
+    tools:background="@color/event_detail_item_background_color">
 
     <ImageView
         android:id="@+id/event_detail_content_item_address_image"
@@ -14,19 +14,23 @@
         android:adjustViewBounds="true"
         android:src="@drawable/btn_action_map"
         android:text="@string/fallback_item_description"
+        app:layout_constraintEnd_toStartOf="@+id/event_detail_content_item_address"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/event_detail_content_item_address"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/event_detail_inside_spacing"
         android:layout_marginStart="@dimen/event_detail_inside_spacing"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="@color/event_detail_item_address_text_color"
         app:layout_constraintBottom_toBottomOf="@+id/event_detail_content_item_address_image"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/event_detail_content_item_address_image"
         app:layout_constraintTop_toTopOf="@+id/event_detail_content_item_address_image"
         app:layout_constraintVertical_chainStyle="packed"
@@ -34,14 +38,13 @@
 
     <TextView
         android:id="@+id/event_detail_content_item_date"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/event_detail_inside_spacing"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/fallback_item_description"
+        android:textColor="@color/event_detail_item_date_text_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_detail_content_item_address_image"
         app:layout_constraintVertical_chainStyle="packed"

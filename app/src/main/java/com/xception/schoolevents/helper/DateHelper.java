@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class DateHelper {
 
-    public static final String DATE_SERVER_PATTERN = "yyyy-MM-dd";
+    public static final String DATE_SERVER_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
     /**
      * Convert a date string from server to a date

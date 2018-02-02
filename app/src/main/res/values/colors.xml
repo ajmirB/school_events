@@ -4,11 +4,19 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Default -->
+    <color name="default_background">#f2f2f2</color>
+
     <!-- Event list -->
-    <color name="event_list_section_item_title_background_color">#3d3d3d</color>
-    <color name="event_list_section_item_title_text_color">#FFF</color>
+    <color name="event_list_section_item_title_background_color">@color/default_background</color>
+    <color name="event_list_section_item_title_text_color">@color/colorPrimary</color>
+
+    <color name="event_list_event_item_title_text_color">#000</color>
+    <color name="event_list_event_item_description_text_color">#4d4d4d</color>
 
     <!-- Event detail -->
-    <color name="event_detail_background_color">#f2f2f2</color>
+    <color name="event_detail_item_background_color">@color/default_background</color>
+    <color name="event_detail_item_address_text_color">@color/colorPrimary</color>
+    <color name="event_detail_item_date_text_color">@color/colorPrimary</color>
 
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Default -->
-    <dimen name="external_spacing">8dp</dimen>
+    <dimen name="external_spacing">12dp</dimen>
     <dimen name="inside_spacing">10dp</dimen>
 
     <!-- Fallback -->
@@ -13,12 +13,13 @@
     <dimen name="event_list_item_external_spacing">@dimen/external_spacing</dimen>
     <dimen name="event_list_item_inside_spacing">@dimen/inside_spacing</dimen>
 
-    <dimen name="event_list_section_item_text_size">16sp</dimen>
+    <dimen name="event_list_section_item_text_size">24sp</dimen>
 
     <dimen name="event_list_item_image_size">40dp</dimen>
     <dimen name="event_list_event_item_image_size">40dp</dimen>
     <dimen name="event_list_event_item_date_text_size">16sp</dimen>
-    <dimen name="event_list_event_item_secondary_text_size">14sp</dimen>
+    <dimen name="event_list_event_item_title_text_size">14sp</dimen>
+    <dimen name="event_list_event_item_description_text_size">12sp</dimen>
 
     <!-- Event detail -->
     <dimen name="event_detail_external_spacing">24dp</dimen>
